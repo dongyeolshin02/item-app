@@ -16,11 +16,14 @@ const queryClient = new QueryClient({
 function App() {
 
   return (
-    <>
-     <div className='text-3xl font-bold underline'>
-      Hello World
-     </div>
-    </>
+    <QueryClientProvider client={queryClient}>
+     <BrowserRouter>
+     <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/about' element={<About />} />
+     </Routes>
+     </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
