@@ -1,5 +1,7 @@
-import { QueryClient } from '@tanstack/react-query';
-import './App.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import LoginForm from './pages/login/LoginForm';
+import MainPage from './pages/MainPage';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 
 // React Query 클라이언트 생성
@@ -18,9 +20,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
      <BrowserRouter>
-     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/about' element={<About />} />
+      <Routes>
+      <Route path='/' element={<MainPage />} />
+       <Route path='/login' element={<LoginForm />} />
      </Routes>
      </BrowserRouter>
     </QueryClientProvider>
