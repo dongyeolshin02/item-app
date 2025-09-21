@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+.nav {
+    background-color: #222;
+    padding: 1rem 1rem;
+}
+
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    gap : 2rem;
+    margin : 0;
+    padding: 0;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-list li{
+    position: relative;
+}
+
+.nav-list a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem;
+}
+
+.nav-list a:hover{
+    background-color: #444;
+}
+
+/* 공통 서브메뉴 스타일 */
+.nav-submenu{
+    list-style-type: none;
+    display: none;
+    position: absolute;
+    top: 2.1rem;
+    background-color: #333;
+    border-radius: 5px;
+    min-width: 140px;
+    box-shadow: 0 2px 8px #f2f2f2;
+    padding: 0.5rem 0;
+    z-index: 99999;
+}
+
+/* 게시판 메뉴 */
+.nav-board span{
+    color : white;
+    cursor: pointer;
+    padding: 0.7rem 0.7rem;
+    border-radius: 5px;
+}
+
+.nav-board span:hover{
+    background-color: #444;
+}
+
+.nav-board:hover .nav-submenu,
+.nav-board:focus-within .nav-submenu{
+    display: block;
+}
+
+.nav-board .nav-submenu {
+    left: 0;
+}
+
+/* 사용자 메뉴 */
+.nav-user {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-user > span {
+    color: white;
+    padding: 0.7rem 0.7rem;
+    border-radius: 5px;
+    display: block;
+}
+
+.nav-user > span:hover {
+    background-color: #444;
+}
+
+.nav-user:hover .nav-submenu,
+.nav-user:focus-within .nav-submenu {
+    display: block;
+}
+
+.nav-user .nav-submenu {
+    right: 0;
+    left: auto;
+}
+
+/* 공통 서브메뉴 아이템 스타일 */
+.nav-submenu a,
+.nav-submenu button {
+    display: block;
+    color: white;
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-size: inherit;
+}
+
+.nav-submenu a:hover,
+.nav-submenu button:hover {
+    background-color: #444;
+}
+
+.active{
+    background-color: #1976d2;
+    color : white;
+}
+
+/* 오른쪽 정렬 */
+.ms-auto {
+    margin-left: auto;
+}

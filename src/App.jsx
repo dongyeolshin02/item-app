@@ -1,32 +1,39 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import LoginForm from './pages/login/LoginForm';
-import MainPage from './pages/MainPage';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { useState } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import Layout from "./pages/layout/Layout.jsx";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import LoginForm from "./pages/login/LoginForm.jsx";
 
 
 // React Query 클라이언트 생성
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      staleTime: 5 * 60 * 1000, // 5분
+    defaultOptions: {
+        queries: {
+            retry: 1,
+            staleTime: 5 * 60 * 1000, // 5분
+        },
     },
-  },
 });
 
 
-function App() {
+const router = createBrowserRouter([
+    {
+        path:'/',
+        Component : Layout
+    },
+    {
+        path : '/login',
+        Component : LoginForm
+    }
+]);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-     <BrowserRouter>
-      <Routes>
-      <Route path='/' element={<MainPage />} />
-       <Route path='/login' element={<LoginForm />} />
-     </Routes>
-     </BrowserRouter>
-    </QueryClientProvider>
-  )
+
+function App() {
+    return(
+        <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router}/>
+        </QueryClientProvider>
+    )
 }
 
 export default App

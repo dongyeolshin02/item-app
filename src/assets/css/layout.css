@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.contents{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+
+}
