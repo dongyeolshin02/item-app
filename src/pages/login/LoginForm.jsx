@@ -3,6 +3,7 @@ import'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import {useLogin} from "../../hooks/useLogin.js";
 
 const schema = yup.object().shape({
     username: yup.string().required('아이디를 입력하십시오'),
@@ -10,11 +11,15 @@ const schema = yup.object().shape({
 });
 
 function LoginForm() {
+
+    const {loginMutation} = useLogin();
+
     const {register, handleSubmit, formState:{errors}}
                     = useForm({resolver : yupResolver(schema)});
                     
       const sumbmitEvt = (data) =>{
-        console.log(data)
+          console.log(data)
+          loginMutation.mutate(data);
       }
 
 

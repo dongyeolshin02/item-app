@@ -1,8 +1,13 @@
 import React from 'react';
 import '../assets/css/menu/menubar.css';
 import { NavLink } from 'react-router';
+import {useAuthStore} from "../store/Auth.js";
 function MenuBar(props) {
     const isLoggedIn= true;
+    const isAuthenticated = useAuthStore((state)=> state.isAuthenticated());
+    const userName = useAuthStore((s)=> s.userName);
+
+    console.log(userName)
     return (
         <>
             <nav className='nav'>
@@ -25,10 +30,10 @@ function MenuBar(props) {
                         </ul>
                     </li>
                     <li className="ms-auto">
-                        {isLoggedIn ? (
+                        {isAuthenticated ? (
                             // 로그인 상태일 때
                             <div className='nav-user'>
-                                <span>{'사용자'}님 안녕하세요</span>
+                                <span>{userName}님 안녕하세요</span>
                                 <ul className='nav-submenu'>
                                     <li>
                                         <NavLink to="/profile"

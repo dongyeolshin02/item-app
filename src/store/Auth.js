@@ -20,6 +20,7 @@ export const useAuthStore = create(
 
       setAuth: ({ token, refreshToken, userId, userName }) =>
         set((state) => {
+            console.log(token)
           state.token = token;
           state.refreshTokenValue = refreshToken;
           state.userId = userId ?? null;
@@ -39,58 +40,28 @@ export const useAuthStore = create(
           state.userName = null;
         }),
 
-      login: async ({ userId, password }) => {
-        const resp = await plainAxios.post("api/v1/login", { userId, password });
-        const { accessToken, refreshToken, user } = resp.data;
-        
-        set((state) => {
-          state.token = accessToken;
-          state.refreshTokenValue = refreshToken;
-          state.userId = user?.userId ?? userId;
-          state.userName = user?.userName ?? null;
-        });
-        
-        return true;
-      },
+        isTokenExpired: () => {
+            const token = get().token;
+            if (!token) return true;
 
-      logout: async () => {
-        try {
-          await plainAxios.post("api/v1/logout");
-        } catch (error) {
-          console.error("로그아웃 실패", error);
-        }
-        
-        set((state) => {
-          state.token = null;
-          state.refreshTokenValue = null;
-          state.userId = null;
-          state.userName = null;
-        });
-      },
-
-      refreshToken: async () => {
-        const { refreshTokenValue } = get();
-        if (!refreshTokenValue) return false;
-
-        try {
-          const resp = await plainAxios.post("api/v1/refresh", {
-            refreshToken: refreshTokenValue,
-          });
-          const { accessToken, refreshToken } = resp.data || {};
-          if (!accessToken) return false;
-
-          set((state) => {
-            state.token = accessToken;
-            if (refreshToken) {
-              state.refreshTokenValue = refreshToken;
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                return payload.exp * 1000 < Date.now();
+            } catch {
+                return true;
             }
-          });
-          
-          return accessToken;
-        } catch {
-          return false;
-        }
-      },
+        },
+
+        // 자동 로그아웃 기능
+        logout: () => {
+            set((state) => {
+                state.token = null;
+                state.refreshTokenValue = null;
+                state.userId = null;
+                state.userName = null;
+            });
+            // API 호출로 서버에서도 로그아웃 처리
+        },
     })),
     {
       name: "auth-store",
