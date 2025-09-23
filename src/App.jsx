@@ -11,7 +11,9 @@ const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
             retry: 1,
-            staleTime: 5 * 60 * 1000, // 5분
+            staleTime: 5 * 60 * 1000,   // 5분간 데이터를 fresh로 간주
+            cacheTime: 10 * 60 * 1000,  // 10분간 캐시 유지 (기본값: 5분)
+            refetchOnWindowFocus: false, // 윈도우 포커스시 재요청 비활성화
         },
     },
 });

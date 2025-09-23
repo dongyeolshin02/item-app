@@ -5,7 +5,7 @@ import {useAuthStore} from "../store/Auth.js";
 function MenuBar(props) {
     const isLoggedIn= true;
     const isAuthenticated = useAuthStore((state)=> state.isAuthenticated());
-    const userName = useAuthStore((s)=> s.userName);
+    const userName = useAuthStore((s)=> s.userId);
 
     console.log(userName)
     return (

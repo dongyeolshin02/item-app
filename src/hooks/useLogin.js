@@ -6,14 +6,14 @@ import React from 'react';
 import {useNavigate} from "react-router";
 
 export const useLogin = () => {
-
     const{setAuth} = useAuthStore();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const loginMutation = useMutation({
         mutationFn :  async (credentials) => {
             try {
-                const response = await api.post('/api/login', credentials, {
+                const response = await api.post('/api/v1/login', credentials, {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
@@ -25,7 +25,10 @@ export const useLogin = () => {
         },
         onSuccess : (data) =>{
             console.log(data);
-            setAuth(data);
+            //캐시무효화 
+            queryClient.invalidateQueries({ queryKey: ['users'] });
+            //토클 저장
+            setAuth(data.content);
             navigate('/board');
         },
     })

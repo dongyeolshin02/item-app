@@ -6,7 +6,7 @@ function Layout(props) {
     return (
         <div>
             <MenuBar/>
-            <section className='contents'>
+            <section>
                 <Outlet/>
             </section>
         </div>

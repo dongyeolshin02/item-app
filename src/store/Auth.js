@@ -20,6 +20,7 @@ export const useAuthStore = create(
 
       setAuth: ({ token, refreshToken, userId, userName }) =>
         set((state) => {
+          
             console.log(token)
           state.token = token;
           state.refreshTokenValue = refreshToken;
