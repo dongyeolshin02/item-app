@@ -18,7 +18,6 @@ function LoginForm() {
                     = useForm({resolver : yupResolver(schema)});
                     
       const sumbmitEvt = (data) =>{
-          console.log(data)
           loginMutation.mutate(data);
       }
 

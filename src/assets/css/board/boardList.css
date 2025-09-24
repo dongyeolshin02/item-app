@@ -1,1 +1,17 @@
 @charset "UTF-8";
+
+.header{
+    margin-top: 20px;
+    text-align: center;
+}   
+
+.contents{
+    margin-top: 20px;
+    width: 100%;
+    height: 500px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}

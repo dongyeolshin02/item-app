@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter } from 'react-router'
+import { RouterProvider } from "react-router/dom";
 import Layout from "./pages/layout/Layout.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import LoginForm from "./pages/login/LoginForm.jsx";
 import BoardList from "./pages/board/BoardList.jsx";
+import BoardDetail from './pages/board/BoardDetail.jsx';
 
 
 // React Query 클라이언트 생성
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
                 path: 'board',
                 children:[
                     {index: true , Component : BoardList},
+                    {path: ':brdId' , Component : BoardDetail },
                 ]
             },
         ]

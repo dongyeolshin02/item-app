@@ -5,6 +5,9 @@ import axios from "axios";
 
 const plainAxios = axios.create({
   timeout: 10000,
+
+  
+  
 });
 
 
@@ -20,8 +23,6 @@ export const useAuthStore = create(
 
       setAuth: ({ token, refreshToken, userId, userName }) =>
         set((state) => {
-          
-            console.log(token)
           state.token = token;
           state.refreshTokenValue = refreshToken;
           state.userId = userId ?? null;

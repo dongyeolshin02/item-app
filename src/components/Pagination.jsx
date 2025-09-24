@@ -15,6 +15,7 @@ const Pagination = ({
   });
 
   const calculatePaginationData = () => {
+    
     if (!totalRows || totalRows <= 0 || !pagePerRows || pagePerRows <= 0) {
       return { totalPage: 0, nowBlock: 0, totalBlock: 0 };
     }
